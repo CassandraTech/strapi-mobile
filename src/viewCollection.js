@@ -5,7 +5,7 @@ class ViewCollection extends React.Component {
   render() {
     return (
       <View>
-        <Text>You have {this.props.route.params.ctype} subjects.</Text>
+        <Text>You have subjects.</Text>
       </View>
     );
   }
