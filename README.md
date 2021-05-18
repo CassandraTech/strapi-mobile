@@ -1,8 +1,8 @@
 # Strapi Mobile
 
 ## Roadmap
-1. [ ] Figure to pass props to viewCollection.js
-2. [ ] Run Strapi Query on load from viewCollection.js
+1. [x] Figure to pass props to ViewTables.js
+2. [x] Run Strapi Query on load from ViewTables.js
      - [ ] If query gives 403, show a message saying that they dont have access to this.
      - [ ] If query gives 404, say Collection not found. Link them to point 7.1.
 3. [ ] Make custom Homepage
@@ -17,3 +17,5 @@
      - [ ] Why are old collection details still being shown in my app: Strapi doesnt support yet.
 8. [ ] If on app load, Strapi gives 404 error, then ask User if their Strapi Admin has installed the strapi-plugin-mobile on their Strapi instance.
 9. [ ] Make a same Error page template for points 2.1, 2.2, 8. 
+10. [ ] Make Fancy Splash Screen
+11. [ ] Highlight DrawerItem if already selected.

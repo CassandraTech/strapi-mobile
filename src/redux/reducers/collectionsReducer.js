@@ -1,12 +1,13 @@
 const initState = {
-  payload: null,
   error: '',
 };
 
-const collectionsReducer = (state = {}, action) => {
+const collectionsReducer = (state = initState, action) => {
   switch (action.type) {
     case 'COLMET':
-      return {...action.payload}
+      return {...state, metadata: action.payload};
+    case 'COLDATA':
+      return {...state, data: action.payload};
     default:
       return state;
   }

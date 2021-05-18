@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import ViewCollection from './src/viewCollection';
-import {Appbar, Drawer as PaperDrawer} from 'react-native-paper';
-import {Platform} from 'react-native';
+import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
+import ViewTables from './src/viewTables';
+import {Appbar, Divider, Drawer as PaperDrawer} from 'react-native-paper';
+import {Platform, Text} from 'react-native';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
+import Home from './src/home';
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from '@react-navigation/drawer';
 
-const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+import _ from 'lodash';
 
 const Drawer = createDrawerNavigator();
 // const store = createStore();
@@ -22,52 +27,88 @@ const HeaderComponent = ({scene, subTitle}) => {
   );
 };
 
-const DrawerComponent = ({descriptors}) => {
-  console.log(Object.keys(descriptors));
-  const [active, setActive] = React.useState('');
+const DrawerComponent = props => {
   return (
-    <PaperDrawer.Section title="Some title">
-      <PaperDrawer.Item
-        label="First Item"
-        active={active === 'first'}
-        onPress={() => setActive('first')}
+    <DrawerContentScrollView {...props}>
+      <Text>Built by Nirmal Khedkar</Text>
+      <DrawerItem
+        label="Home"
+        onPress={() => {
+          props.navigation.navigate('Home');
+        }}
       />
-      <PaperDrawer.Item
-        label="Second Item"
-        active={active === 'second'}
-        onPress={() => setActive('second')}
+      <DrawerItem
+        label="Settings"
+        onPress={() => {
+          props.navigation.navigate('Home');
+        }}
       />
-    </PaperDrawer.Section>
+      <Divider />
+      <Text>Collection Type</Text>
+      {props.drawer_items &&
+        props.drawer_items.collectionType.map((e, i) => (
+          <DrawerItem
+            label={e.name}
+            key={i}
+            onPress={() => {
+              props.navigation.navigate(e.name);
+            }}
+          />
+        ))}
+            <Divider />
+      <Text>Single Type</Text>
+      {props.drawer_items &&
+        props.drawer_items.singleType.map((e, i) => (
+          <DrawerItem
+          key={i}
+            label={e.name}
+            onPress={() => {
+              props.navigation.navigate(e.name);
+            }}
+          />
+        ))}
+    </DrawerContentScrollView>
   );
 };
 
 const Main = ({collections}) => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="C1">
+      <Drawer.Navigator
+        drawerContent={props => (
+          <DrawerComponent
+            {...props}
+            drawer_items={
+              collections && _.groupBy(Object.values(collections), e => e.kind)
+            }
+          />
+        )}
+        initialRouteName="Home">
         <Drawer.Screen
-          initialParams={{ctype: 'te'}}
           name="Home"
+          cbx="dc"
           options={{
             header: ({scene}) => <HeaderComponent scene={scene} />,
             headerShown: true,
           }}
-          component={ViewCollection}
+          component={Home}
         />
 
-        {Object.values(collections).map((e, i) => (
-          <Drawer.Screen
-            name={e.name}
-            key={i}
-            options={{
-              header: ({scene}) => (
-                <HeaderComponent scene={scene} subTitle={e.collectionName} />
-              ),
-              headerShown: true,
-            }}
-            component={ViewCollection}
-          />
-        ))}
+        {collections &&
+          Object.values(collections).map((e, i) => (
+            <Drawer.Screen
+              name={e.name}
+              key={i}
+              options={{
+                header: ({scene}) => (
+                  <HeaderComponent scene={scene} subTitle={e.collectionName} />
+                ),
+                headerShown: true,
+                details: e,
+              }}>
+              {props => <ViewTables {...props} details={e} />}
+            </Drawer.Screen>
+          ))}
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -75,7 +116,7 @@ const Main = ({collections}) => {
 
 const mapStateToProps = state => {
   return {
-    collections: state.collectionMetadata,
+    collections: state.collections.metadata,
   };
 };
 
