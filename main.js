@@ -95,18 +95,18 @@ const Main = ({collections}) => {
         />
 
         {collections &&
-          Object.values(collections).map((e, i) => (
+          Object.keys(collections).map((e, i) => (
             <Drawer.Screen
-              name={e.name}
+              name={collections[e].name}
               key={i}
               options={{
                 header: ({scene}) => (
-                  <HeaderComponent scene={scene} subTitle={e.collectionName} />
+                  <HeaderComponent scene={scene} subTitle={collections[e].collectionName} />
                 ),
                 headerShown: true,
                 details: e,
               }}>
-              {props => <ViewTables {...props} details={e} />}
+              {props => <ViewTables {...props} details={{...collections[e],key:e}} />}
             </Drawer.Screen>
           ))}
       </Drawer.Navigator>

@@ -19,3 +19,4 @@
 9. [ ] Make a same Error page template for points 2.1, 2.2, 8. 
 10. [ ] Make Fancy Splash Screen
 11. [ ] Highlight DrawerItem if already selected.
+12. [ ] The view for SingleType should be same as view for a CollectionType entry.
