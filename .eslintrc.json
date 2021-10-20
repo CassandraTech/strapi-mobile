@@ -1,0 +1,74 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project":"./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint",
+    // Common Twzzr ESLint Plugins
+    "filenames","folders", "write-good-comments"],
+  "extends": [
+    "@react-native-community",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+
+    // Common Twzzr ESLint extensions.
+    // "eslint:recommended",
+    "plugin:sonarjs/recommended"
+  ],
+  "rules": {
+    // Typescript Rules
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+
+    // Common Twzzr Rules
+    "arrow-parens": "error",
+    "camelcase": "warn",
+    "filenames/match-exported": ["error", "camel"],
+    "filenames/match-regex": "error",
+    "folders/match-regex": [2, "^[a-z]+(?:[A-Z][a-z]+)*$", "/src/"],
+    "prettier/prettier": "off",
+    "id-length": "warn",
+    "jsx-quotes": "error",
+    "no-confusing-arrow": "warn",
+    "no-else-return": "warn",
+    "no-undef-init": "error",
+    "new-cap": "error",
+    "no-array-constructor": "error",
+    "no-const-assign": "error",
+    "no-dupe-class-members": "error",
+    "no-duplicate-imports": "error",
+    "no-eval": "error",
+    "eqeqeq": "error",
+    "no-new-func": "error",
+    "no-new-object": "error",
+    "no-underscore-dangle": "off",
+    "no-unneeded-ternary": "error",
+    "no-useless-constructor": "error",
+    "no-useless-escape": "error",
+    "no-var": "error",
+    "object-shorthand": "error",     
+    "prefer-template": "error",
+    "semi": "error",
+    "no-useless-return": "error",
+    "sort-vars": "warn",
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "prefer-spread": "error",
+    "write-good-comments/write-good-comments": "warn",
+    "radix":"off",
+    
+    // Common Twzzr Rules: Frontend
+    "react/boolean-prop-naming":"error",
+    "react/jsx-no-useless-fragment": "error",
+    "react/jsx-sort-props": "error",
+    "react/jsx-boolean-value": "warn",
+    "react/jsx-pascal-case": "warn",
+    "react/prefer-es6-class": "error",
+    "react/require-render-return": "error",
+    "react/self-closing-comp": "error",
+
+    // Mobile configuration
+    "react-native/no-inline-styles": "off"
+  }
+}
