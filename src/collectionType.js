@@ -2,14 +2,12 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {DataTable} from 'react-native-paper';
 import {connect} from 'react-redux';
-import {collection_get} from './redux/actions/collections';
 
 class CollectionType extends React.Component {
   state = {
     defaultShown: 10
   };
   componentDidMount() {
-    this.props.collection_get(this.props.details.collectionName);
     this.setState({
       rows: this.props.collections || [],
     });
@@ -53,5 +51,5 @@ const mapStateToProps = state => {
     collections: state.collections.data,
   };
 };
-const mapDispatchToProps = {collection_get};
-export default connect(mapStateToProps, mapDispatchToProps)(CollectionType);
+// const mapDispatchToProps = {collection_get};
+export default CollectionType;

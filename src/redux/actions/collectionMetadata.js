@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const collectionMetadata_get = () => {
   return async dispatch => {
-    const BASE_URL = 'https://ietnitk-cms.herokuapp.com';
+    const BASE_URL = 'https://octaweb.herokuapp.com';
     const res = await axios.get(`${BASE_URL}/mobile/metadata`);
     if (res.data) {
       dispatch({

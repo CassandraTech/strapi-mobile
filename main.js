@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import ViewTables from './src/viewTables';
 import {Appbar, Divider, Drawer as PaperDrawer} from 'react-native-paper';
 import {Platform, Text} from 'react-native';
 import {compose} from 'redux';
@@ -55,12 +54,12 @@ const DrawerComponent = props => {
             }}
           />
         ))}
-            <Divider />
+      <Divider />
       <Text>Single Type</Text>
       {props.drawer_items &&
         props.drawer_items.singleType.map((e, i) => (
           <DrawerItem
-          key={i}
+            key={i}
             label={e.name}
             onPress={() => {
               props.navigation.navigate(e.name);
@@ -101,12 +100,20 @@ const Main = ({collections}) => {
               key={i}
               options={{
                 header: ({scene}) => (
-                  <HeaderComponent scene={scene} subTitle={collections[e].collectionName} />
+                  <HeaderComponent
+                    scene={scene}
+                    subTitle={collections[e].collectionName}
+                  />
                 ),
                 headerShown: true,
                 details: e,
               }}>
-              {props => <ViewTables {...props} details={{...collections[e],key:e}} />}
+              {props => {
+                const details={...collections[e], key: e};
+                if (details.kind !== 'singleType') {
+                  return <CollectionType {...props} />;
+                } else return <SingleType {...props} />;
+              }}
             </Drawer.Screen>
           ))}
       </Drawer.Navigator>
@@ -120,4 +127,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Main);
+export default Main;

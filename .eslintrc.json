@@ -2,26 +2,24 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project":"./tsconfig.json"
+    "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint",
-    // Common Twzzr ESLint Plugins
-    "filenames","folders", "write-good-comments"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-native",
+    "filenames",
+    "folders",
+    "write-good-comments"
+  ],
   "extends": [
-    "@react-native-community",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-
-    // Common Twzzr ESLint extensions.
-    // "eslint:recommended",
     "plugin:sonarjs/recommended"
   ],
   "rules": {
-    // Typescript Rules
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
-
-    // Common Twzzr Rules
     "arrow-parens": "error",
     "camelcase": "warn",
     "filenames/match-exported": ["error", "camel"],
@@ -47,7 +45,7 @@
     "no-useless-constructor": "error",
     "no-useless-escape": "error",
     "no-var": "error",
-    "object-shorthand": "error",     
+    "object-shorthand": "error",
     "prefer-template": "error",
     "semi": "error",
     "no-useless-return": "error",
@@ -56,10 +54,8 @@
     "prefer-const": "error",
     "prefer-spread": "error",
     "write-good-comments/write-good-comments": "warn",
-    "radix":"off",
-    
-    // Common Twzzr Rules: Frontend
-    "react/boolean-prop-naming":"error",
+    "radix": "off",
+    "react/boolean-prop-naming": "error",
     "react/jsx-no-useless-fragment": "error",
     "react/jsx-sort-props": "error",
     "react/jsx-boolean-value": "warn",
@@ -67,8 +63,8 @@
     "react/prefer-es6-class": "error",
     "react/require-render-return": "error",
     "react/self-closing-comp": "error",
-
-    // Mobile configuration
-    "react-native/no-inline-styles": "off"
+    "react-native/no-inline-styles": "off",
+    "react-native/sort-styles": "error",
+    "react-native/no-unused-styles": "warn"
   }
 }
